@@ -1,7 +1,9 @@
 #
 # Makefile template for ATtiny85
 # Derived from AVR Crosspack template
-#
+# Adapted from Ryan Leary on GitHub
+# https://gist.githubusercontent.com/ryanleary/8250880/raw/3170c6bbcca5b925d3e23fca01a12bee0b7f5222/attiny85_makefile
+# Added tabs to start of lines after targets, otherwise it wouldn't run on my Ubuntu setup.
 
 DEVICE     = attiny85           # See avr-help for all possible devices
 CLOCK      = 8000000            # 8Mhz
