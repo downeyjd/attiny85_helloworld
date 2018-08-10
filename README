@@ -1,0 +1,3 @@
+First shot at programming ATtiny85 without Arduino bootloader or IDE
+Running on Ubuntu CLI using AVR dude and gcc-avr using Makefile to compile, flash, and set fuses.
+Fuses aren't the same as the default for ATtiny85 in the web calculator.  These don't use the 1/8 clock setting.
