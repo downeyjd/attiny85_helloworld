@@ -8,6 +8,10 @@
  *  
  */
 
+#ifndef __AVR_ATtiny85__ // added bc IDEs don't get compiler flag for ATtiny85 and header files need that info
+#define __AVR_ATtiny85__
+#endif
+
 #include <avr/io.h>
 // F_CPU frequency to be defined at command line
 #include <util/delay.h>

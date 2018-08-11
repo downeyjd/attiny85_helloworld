@@ -7,31 +7,37 @@
  *
  */
 
+#ifndef __AVR_ATtiny85__ // added bc IDEs don't get compiler flag for ATtiny85 and header files need that info
+#define __AVR_ATtiny85__
+#endif
+
 #include <avr/io.h>
 // F_CPU frequency to be defined at command line
 #include <util/delay.h>
 
 // LED is on pin 2, PB3
-#define LED      PB3
+#define LED PB3
 #define DELAY_MS 1000
 
 // write digital "high" to pin <pn> on port <prt>
-#define DIGIWRITE_H(prt, pn) prt |= (1<<pn)
+#define DIGIWRITE_H(prt, pn) prt |= (1 << pn)
 
 // write digital "low" to pin <pn> on port <prt>
-#define DIGIWRITE_L(prt, pn) prt &= ~(1<<pn)
+#define DIGIWRITE_L(prt, pn) prt &= ~(1 << pn)
 
 // Define long delay function
 // uses a for loop to get around the requirement that the avr built-in
 // underlying _delay_ms requires compile time constant
-void long_delay_ms(uint16_t ms) {
-    for(ms /= 10; ms>0; ms--) _delay_ms(10); 	// initializes with /= bc it's
-																							// the number of 10s of ms to run
-																							// and the code block is _delay_ms(10)
+void long_delay_ms(uint16_t ms)
+{
+	for (ms /= 10; ms > 0; ms--)
+		_delay_ms(10); // initializes with /= bc it's
+					   // the number of 10s of ms to run
+					   // and the code block is _delay_ms(10)
 }
 
-
-int main () {
+int main()
+{
 	uint8_t high = 0;
 	uint16_t ms = 0;
 
@@ -39,21 +45,29 @@ int main () {
 	DDRB |= (1 << LED);
 
 	// set LED pin LOW
-	PORTB &= ~(1 << LED);
+	//PORTB &= ~(1 << LED);
+	DIGIWRITE_L(PORTB, LED);
 
-	while (1) {
+	while (1)
+	{
 		high = !high;
 
-		if (high) {
+		if (high)
+		{
 			// set LED pin HIGH
-			PORTB |= (1 << LED);
-		} else {
+			//PORTB |= (1 << LED);
+			DIGIWRITE_H(PORTB, LED);
+		}
+		else
+		{
 			// set LED pin LOW
-			PORTB &= ~(1 << LED);
+			//PORTB &= ~(1 << LED);
+			DIGIWRITE_L(PORTB, LED);
 		}
 
 		// delay for 500 ms
-		for (ms = DELAY_MS; ms > 0; ms -= 10) {
+		for (ms = DELAY_MS; ms > 0; ms -= 10)
+		{
 			_delay_ms(10);
 		}
 	}
